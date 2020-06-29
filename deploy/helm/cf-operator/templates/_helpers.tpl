@@ -41,3 +41,14 @@ Create the name of the cf-operator service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Backwards Compatibility
+*/}}
+{{- define "cf-operator.singleNamespace.create" -}}
+    {{ default .Values.global.singleNamespace.create .Values.createWatchNamespace }}
+{{- end -}}
+
+{{- define "cf-operator.singleNamespace.name" -}}
+    {{ default .Values.global.singleNamespace.name .Values.global.operator.watchNamespace }}
+{{- end -}}

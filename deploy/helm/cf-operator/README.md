@@ -13,7 +13,7 @@ helm repo add quarks https://cloudfoundry-incubator.github.io/quarks-helm/
 helm install cf-operator quarks/cf-operator
 ```
 
-The operator will watch for BOSH deployments in separate namespaces (default: one namespace named 'staging'), not the one it has been deployed to.
+The operator will watch for BOSH deployments in separate namespaces (default: one namespace named 'kubecf'), not the one it has been deployed to.
 
 ### Using multiple operators
 
