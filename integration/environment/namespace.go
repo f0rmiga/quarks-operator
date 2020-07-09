@@ -9,8 +9,8 @@ import (
 	"github.com/pkg/errors"
 
 	qjv1a1 "code.cloudfoundry.org/quarks-job/pkg/kube/apis/quarksjob/v1alpha1"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/monitorednamespace"
+	"code.cloudfoundry.org/quarks-statefulset/pkg/kube/controllers"
+	"code.cloudfoundry.org/quarks-utils/pkg/monitorednamespace"
 	utils "code.cloudfoundry.org/quarks-utils/testing/integration"
 )
 

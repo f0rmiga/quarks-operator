@@ -13,11 +13,9 @@ import (
 	"github.com/onsi/gomega/gexec"
 	"github.com/pkg/errors"
 
-	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/operator"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/operatorimage"
+	"code.cloudfoundry.org/quarks-statefulset/pkg/kube/operator"
 	helper "code.cloudfoundry.org/quarks-utils/testing/testhelper"
 )
 
@@ -76,26 +74,6 @@ func (e *Environment) setupCFOperator() (manager.Manager, error) {
 	}
 
 	e.Config.WebhookServerPort = port
-
-	dockerImageOrg, found := os.LookupEnv("DOCKER_IMAGE_ORG")
-	if !found {
-		dockerImageOrg = "cfcontainerization"
-	}
-
-	dockerImageRepo, found := os.LookupEnv("DOCKER_IMAGE_REPOSITORY")
-	if !found {
-		dockerImageRepo = "cf-operator"
-	}
-
-	dockerImageTag, found := os.LookupEnv("DOCKER_IMAGE_TAG")
-	if !found {
-		return nil, errors.Errorf("required environment variable DOCKER_IMAGE_TAG not set")
-	}
-
-	err = operatorimage.SetupOperatorDockerImage(dockerImageOrg, dockerImageRepo, dockerImageTag, corev1.PullIfNotPresent)
-	if err != nil {
-		return nil, err
-	}
 
 	ctx := e.SetupLoggerContext("cf-operator-tests")
 
