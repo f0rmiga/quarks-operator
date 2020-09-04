@@ -82,7 +82,7 @@ jobs:
         git config --global user.email "no-reply@quarks.cloudfoundry.org"
         git config --global user.name $GITHUB_ACTOR
         bin/build-helm
-        PROJECT=cf-operator bin/build-image
+        bin/build-image
         bin/test-integration
         INTEGRATION_SUITE=storage bin/test-integration
         INTEGRATION_SUITE=util bin/test-integration
