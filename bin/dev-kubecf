@@ -22,7 +22,7 @@ case "$1" in
         ;;
 
     template|t)
-        helm template "$relname" helm/cf-operator/ \
+        helm template "$relname" helm/quarks-operator/ \
           --namespace "$namespace" \
           --set "global.singleNamespace.name=kubecf"
       ;;
@@ -30,7 +30,7 @@ case "$1" in
 
     *)
         kubectl create ns "$namespace"
-        helm install "$relname" helm/cf-operator --namespace "$namespace" --wait --set "global.singleNamespace.name=kubecf"
+        helm install "$relname" helm/quarks-operator --namespace "$namespace" --wait --set "global.singleNamespace.name=kubecf"
         helm list --namespace "$namespace"
         ;;
 esac
