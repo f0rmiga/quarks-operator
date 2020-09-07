@@ -70,7 +70,7 @@ var _ = Describe("Quarks-operator Upgrade test", func() {
 			dir, err := os.Getwd()
 			Expect(err).ToNot(HaveOccurred())
 
-			chartPath := fmt.Sprintf("%s%s", dir, "/../../../helm/quarks-operator")
+			chartPath := fmt.Sprintf("%s%s", dir, "/../../../helm/quarks")
 			if singlenamespace {
 				teardown, err := e2ehelper.UpgradeChart(chartPath, operatorNamespace,
 					"--set", fmt.Sprintf("global.singleNamespace.name=%s", namespace),
@@ -89,7 +89,7 @@ var _ = Describe("Quarks-operator Upgrade test", func() {
 		}
 
 		deployLatestOperator := func(singlenamespace bool) {
-			path, teardown, err := e2ehelper.GetChart("quarks/quarks-operator")
+			path, teardown, err := e2ehelper.GetChart("quarks/quarks")
 			Expect(err).ToNot(HaveOccurred())
 			teardowns = append(teardowns, teardown)
 
@@ -98,13 +98,13 @@ var _ = Describe("Quarks-operator Upgrade test", func() {
 			teardowns = append(teardowns, teardown)
 
 			if singlenamespace {
-				teardown, err = e2ehelper.InstallChart(path+"/quarks-operator", operatorNamespace,
+				teardown, err = e2ehelper.InstallChart(path+"/quarks", operatorNamespace,
 					"--set", fmt.Sprintf("global.singleNamespace.name=%s", monitoredID),
 					"--set", fmt.Sprintf("global.monitoredID=%s", monitoredID),
 					"--set", fmt.Sprintf("quarks-job.persistOutputClusterRole.name=%s", monitoredID),
 				)
 			} else {
-				teardown, err = e2ehelper.InstallChart(path+"/quarks-operator", operatorNamespace,
+				teardown, err = e2ehelper.InstallChart(path+"/quarks", operatorNamespace,
 					"--set", fmt.Sprintf("global.singleNamespace.create=%s", "false"),
 					"--set", fmt.Sprintf("global.monitoredID=%s", monitoredID),
 					"--set", fmt.Sprintf("quarks-job.persistOutputClusterRole.name=%s", monitoredID),
